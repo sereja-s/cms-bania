@@ -1,0 +1,20 @@
+Host: https://sauna-zhara-dn.ru
+
+User-agent: Yandex  
+Disallow:/admin/
+Sitemap: https://sauna-zhara-dn.ru/sitemap.xml
+
+
+User-agent: Googlebot  
+Disallow:/admin/
+Sitemap: https://sauna-zhara-dn.ru/sitemap.xml
+
+
+User-agent: * 
+Disallow:/admin/
+Sitemap: https://sauna-zhara-dn.ru/sitemap.xml
+
+
+
+
+
