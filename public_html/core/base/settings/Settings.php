@@ -72,7 +72,7 @@ class Settings
 	private $messages = 'core/base/messages/';
 
 	// свойство с таблицей по умолчанию
-	private $defaultTable = 'sales';
+	private $defaultTable = 'settings';
 
 	// свойство в котором хранится путь к шаблонам админки
 	private $formTemplates = PATH . 'core/admin/view/include/form_templates/';
@@ -86,16 +86,12 @@ class Settings
 		'questions' => ['name' => 'Вопросы'],
 		'socials' => ['name' => 'Соц.сети'],
 	];
-	// свойство с таблицами в которых будет происходить поиск
-	private $searchProjectTables = [
-		/* 'catalog' => ['name' => 'Каталог (меню)'],
-		'goods' => ['name' => 'Товары'], */];
 
 	// свойство: массив шаблонов
 	private $templateArr = [
 		// массив вида: 'название шаблона' => массив с полями для которых должен быть подключен соответствующий шаблон
-		'text' => ['name', 'phone', 'email', 'alias', 'external_alias', 'title', 'sub_title', 'number_of_years', 'discount', 'price', 'login', 'password'],
-		'textarea' => ['content', 'keywords', 'address', 'description', 'short_content', 'work_schedule'],
+		'text' => ['name', 'phone', 'email', 'address', 'alias', 'external_alias', 'title', 'sub_title', 'number_of_years', 'discount', 'price', 'login', 'password'],
+		'textarea' => ['content', 'keywords', 'full_address', 'description', 'short_content', 'work_schedule'],
 		'radio' => ['visible', 'show_top_menu', 'hit', 'sale', 'new', 'hot'],
 		'checkboxlist' => ['filters', 'filters_test'], // указали, что хотим подключить фильтры к связанной таблице: 
 		// товары (они прописаны в массиве: в свойстве: private $manyToMany)
@@ -112,10 +108,11 @@ class Settings
 		// каждое поле тоже представляет собой массив, в котором можно указать два элемента (название элемента, комментарий элемента)
 		'name' => ['Название', '(Не более 120 символов)'],
 		'content' => ['Описание', '(Текстовая часть, фотографии, картинки к описанию)'],
-		'description' => ['SEO описание'],
+		'description' => ['Описание'],
 		'phone' => ['Телефон'],
 		'email' => ['Электронная почта'],
 		'address' => ['Адрес'],
+		'full_address' => ['Полный адрес'],
 		'alias' => ['Ссылка ЧПУ'],
 		'external_alias' => ['Внешняя ссылка'],
 		'img' => ['Изображение'],
@@ -130,7 +127,6 @@ class Settings
 		'discount' => ['Скидка'],
 		'price' => ['Цена'],
 		'parent_id' => ['Выбрать категорию', '(К чему относится?)'],
-		'promo_img' => ['Изображение для главной страницы'],
 		'work_schedule' => ['График работы'],
 		'login' => ['Логин'],
 		'password' => ['Пароль']
@@ -139,26 +135,17 @@ class Settings
 	// св-во, в котором будут храниться значения для input type radio (кнопок переключателей (да, нет и т.д.))
 	private $radio = [
 		'visible' => ['НЕТ', 'ДА', 'default' => 'ДА'],
-		'show_top_menu' => ['НЕТ', 'ДА', 'default' => 'ДА'],
-		'hit' => ['НЕТ', 'ДА', 'default' => 'НЕТ'],
-		'sale' => ['НЕТ', 'ДА', 'default' => 'НЕТ'],
-		'new' => ['НЕТ', 'ДА', 'default' => 'НЕТ'],
-		'hot' => ['НЕТ', 'ДА', 'default' => 'НЕТ'],
+		'show_top_menu' => ['НЕТ', 'ДА', 'default' => 'ДА']
 	];
 
 	// св-во, в котором будет храниться информация о корневых таблицах
 	private $rootItems = [
 		'name' => 'Корневая',
-		'tables' => ['catalog', 'filters', 'teachers']
+		'tables' => []
 	];
 
 	// свойство для автоматизации связей многие ко многим
-	private $manyToMany = [
-		// массив содержит название таблиц, которые связаны в БД
-		'goods_filters' => ['goods', 'filters'/* , 'type' => 'root' */], // 'type' => 'child' || 'root' - необязательный 
-		// 3-ий элемент массива: показывает (здесь- в товарах) только дочерние элементы или только родительские категории. 
-		// Без него (по умолчанию) будет показано всё (т.е и название фильтра и его значения)
-	];
+	private $manyToMany = [];
 
 	// св-во, в котором будут храниться названия блоков админки (левого, правого, центрального) и их содержимое 
 	// (по умолчанию содержимое разделов адмики занимает левый блок: vg-rows) 

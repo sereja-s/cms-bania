@@ -26,18 +26,12 @@ class IndexController extends BaseUser
 			'order' => ['menu_position'],
 		]);
 
-		// Выпуск №128 | Вывод новостей
-		/* $news = $this->model->get('news', [
+		$questions = $this->model->get('questions', [
 			'where' => ['visible' => 1],
-			'order' => ['date'],
-			'order_direction' => ['DESC'],
-			'limit' => 3
-		]); */
-
-		// Выпуск №125
-		//$goods = $this->model->getGoods();
+			'order' => ['menu_position'],
+		]);
 
 		// собираем переменные в массив и возвращаем в шаблон, что бы они стали доступными при выводе
-		return compact('advantages', 'services');
+		return compact('advantages', 'services', 'questions');
 	}
 }
